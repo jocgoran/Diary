@@ -1,0 +1,10 @@
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\bin\Debug\Diary.exe.config
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\bin\Debug\Diary.exe
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\bin\Debug\Diary.pdb
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\obj\Debug\Diary.csprojResolveAssemblyReference.cache
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\obj\Debug\Diary.Properties.Resources.resources
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\obj\Debug\Diary.csproj.GenerateResource.Cache
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\obj\Debug\Diary.exe
+c:\users\goran\documents\visual studio 2013\Projects\Diary\Diary\obj\Debug\Diary.pdb
+C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\bin\Debug\Diary.exe.CodeAnalysisLog.xml
+C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\bin\Debug\Diary.exe.lastcodeanalysissucceeded
