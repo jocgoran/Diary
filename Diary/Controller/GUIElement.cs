@@ -135,7 +135,6 @@ namespace Diary.Controller
                     switch (ColName)
                     {
                         case "id":
-                        case "name":
                         case "type":
                         case "table":
                         case "column":
@@ -217,7 +216,7 @@ namespace Diary.Controller
                     if (!DBNull.Value.Equals(row["locationY"]))
                         y = Convert.ToInt32(row["locationY"]);
                  
-                    GUIObject.Location = new Point(x * 60, y * 10);
+                    GUIObject.Location = new Point(x * 60, y * 20);
                 }
 
                 // Add GUIObject
@@ -232,15 +231,15 @@ namespace Diary.Controller
             // execute assignment
             foreach (DataRow row in GlobalVar.DataSet.Tables[TableName].Rows) // Loop over the rows.
             {
-                // set all Attributes of Form/Tab/Field
+                // set Text Attributes of the Field
                 foreach (DataColumn column in GlobalVar.DataSet.Tables[TableName].Columns)
                 {
                     string ColName = column.ColumnName;
 
-                    // Search table and column in Form DataTable 
+                    // Search table and column in Field DataTable 
                     string expression = "table = '" + TableName + "' and column = '" + ColName + "'";
 
-                    // Use the Select method to find all rows matching the filter.
+                    // Use the Select method to find all Fields that use matching the filter.
                     DataRow[] foundRows = GlobalVar.DataSet.Tables["field"].Select(expression);
 
                     foreach (DataRow dr in foundRows)

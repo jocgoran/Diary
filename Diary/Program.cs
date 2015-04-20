@@ -21,13 +21,12 @@ namespace Diary
 
             // Create data access
             DAO DataAccess = new DAO();
-
             // create GUIElementes
             GUIElement GUIElements = new GUIElement();
 
             // Add GUIElements as observers to observee (data provider)
             DataAccess.Subscribe(GUIElements);
-
+            
             // create all form
             DataAccess.GetTable("form"); // also create all forms
             // create all fields
@@ -37,6 +36,15 @@ namespace Diary
 
             // assign form fields
             DataAccess.GetTable("asgmt_form_field"); // assign fields to form
+
+            // create EventsToTriggers
+            EventTrigger EventsToTriggers = new EventTrigger();
+            // Add GUIElements as observers to observee (data provider)
+            DataAccess.Subscribe(EventsToTriggers);
+
+            // load all EventsToTriggers
+            DataAccess.GetTable("GUIEventToHandler"); // also create all fields
+
 
             // fill fields with use saved data
             DataAccess.GetTable("event"); // also create all fields

@@ -7,8 +7,8 @@ namespace Diary
     class DBConnect
     {
         private SqlConnection connection;
-        //private string server;
-        //private string database;
+        private string server;
+        private string database;
         //private string uid;
         //private string password;
 
@@ -21,14 +21,14 @@ namespace Diary
         //Initialize values
         private void Initialize()
         {
-            //server = "LAPTOPT\\SQLEXPRESS";
-            //database = "sakila";
+            server = "LAPTOPT\\SQLEXPRESS";
+            database = "diary";
             //uid = "root";
             //password = "root";
             string connectionString;
-            connectionString = "server=localhost\\SQLEXPRESS;" + 
-                                       "Trusted_Connection=yes;" + 
-                                       "database=diary; " + 
+            connectionString = "server=" + server + ";" + 
+                                       "Trusted_Connection=yes;" +
+                                       "database=" + database  + "; " + 
                                        "connection timeout=30";
             try
             {

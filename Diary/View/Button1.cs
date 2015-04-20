@@ -12,7 +12,7 @@ namespace Diary.View
         public Button1()
         {
             // Set to no text.
-            this.Text = "";
+            //this.Text = "";
         }
     } // end class
 } // end namespace

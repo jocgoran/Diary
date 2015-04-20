@@ -16,7 +16,7 @@ namespace Diary
             this.BackColor = Color.White;
             this.ForeColor = Color.Black;
             this.Size = new System.Drawing.Size(300, 250);
-            this.Text = "";
+            //this.Text = "";
             this.AutoSize = true;
             this.StartPosition = FormStartPosition.CenterScreen;
         }

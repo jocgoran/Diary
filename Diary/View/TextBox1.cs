@@ -11,12 +11,12 @@ namespace Diary.View
         public TextBox1()
         {
             // Set to no text.
-            this.Text = "";
+            //this.Text = "";
             // The password character is an asterisk.
-            this.PasswordChar = '\0';
+            //this.PasswordChar = '\0';
             // The control will allow no more than 14 characters.
-            this.MaxLength = 14;
-            this.Location = new Point(1 * 60, 1 * 10);
+            //this.MaxLength = 14;
+            //this.Location = new Point(1 * 60, 1 * 20);
             this.Visible = true;
         }
 
