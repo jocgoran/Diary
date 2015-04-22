@@ -14,5 +14,10 @@ namespace Diary.View
             // Set to no text.
             //this.Text = "";
         }
+
+        public void SaveTheDataSet(System.Object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Hello! This is save event 11");
+        }     
     } // end class
 } // end namespace

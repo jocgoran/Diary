@@ -35,6 +35,10 @@ namespace Diary.Controller
                     InterlaceGUIElements(TableName);
                     break;
                 }
+                case "GUIEventToHandler":
+                {
+                    break;
+                }
                 default:
                 {
                     UdpdateFieldValue(TableName);
@@ -80,17 +84,17 @@ namespace Diary.Controller
                         {
                             switch (row["type"].ToString())
                             {
-                                case "text":
+                                case "Text":
                                 {
                                     GUIObject = new TextBox1();
                                     break;
                                 }
-                                case "button":
+                                case "Button":
                                 {
                                     GUIObject = new Button1();
                                     break;
                                 }
-                                case "label":
+                                case "Label":
                                 {
                                     GUIObject = new Label1();
                                     break;
@@ -138,6 +142,7 @@ namespace Diary.Controller
                         case "type":
                         case "table":
                         case "column":
+                        case "Name":
                         {
                             break;
                         }

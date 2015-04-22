@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Diary.Controller
 {
     class EventHandler
     {
 
-        void SaveTheDataSet(object sender, RoutedEventArgs e)
+        public void SaveTheDataSet()
         {
-        // Here the save code
+            MessageBox.Show("Hello! This is save event");
         }
 
     }

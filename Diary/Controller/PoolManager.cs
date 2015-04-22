@@ -63,7 +63,7 @@ namespace Diary.Controller
             for (int objCtr = 0; objCtr < POOL_SIZE; objCtr++)
             {
                 _obj = new object();
-                objPool.Add(_obj.GetHashCode(), _obj);
+                objPool.Add(_obj, _obj);
                 objCount++;
             }
         }
@@ -73,11 +73,11 @@ namespace Diary.Controller
         /// </summary>
         /// <param name="obj">Object to be added</param>
         /// <returns>True if success, false otherwise</returns>
-        public bool AddObject(string ObjectName, object obj)
+        public bool AddObject(string ObjectName, dynamic obj)
         {
             if (objCount == POOL_SIZE) return false;
 
-            objPool.Add(ObjectName.GetHashCode(), obj);
+            objPool.Add(ObjectName, obj);
             objCount++;
             return true;
         }
@@ -87,11 +87,11 @@ namespace Diary.Controller
         /// </summary>
         /// <param name="obj">Object to remove from the pool</param>
         /// <returns>The object if success, null otherwise</returns>
-        public void GetObject(string ObjectName, ref object obj)
+        public void GetObject(string ObjectName, ref dynamic obj)
         {
             if (objCount == 0) obj=null;
 
-            obj=objPool[ObjectName.GetHashCode()];    
+            obj=objPool[ObjectName];    
             return;
         }
 
