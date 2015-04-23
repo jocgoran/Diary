@@ -74,6 +74,7 @@
     <Compile Include="Controller\EventHandler.cs" />
     <Compile Include="Controller\EventTrigger.cs" />
     <Compile Include="Controller\GUIElement.cs" />
+    <Compile Include="Controller\Navigation.cs" />
     <Compile Include="Controller\PoolManager.cs" />
     <Compile Include="Model\ADataProvider.cs" />
     <Compile Include="Model\DAO.cs" />

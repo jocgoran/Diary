@@ -1,19 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using System;
 
 namespace Diary.Controller
 {
-    class EventHandler
+    public sealed class EventHandler
     {
 
-        public void SaveTheDataSet()
+        // singleton design pattern for initalization
+        private static volatile EventHandler instance;
+        private static object syncRoot = new Object();
+
+        public EventHandler() { }
+
+        public static EventHandler Instance
         {
-            MessageBox.Show("Hello! This is save event");
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                            instance = new EventHandler();
+                    }
+                }
+
+                return instance;
+            }
         }
+        
+        // begin with the list of functions of forms
+        public void SaveTheDataSet(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Here come the save function");
+        }  
 
     }
 }

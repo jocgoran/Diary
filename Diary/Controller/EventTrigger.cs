@@ -33,33 +33,35 @@ namespace Diary.Controller
                 GUIObjectName = row["GUIElementType"].ToString() + "_" + row["GUIElementId"].ToString();                
                 
                 // Get GUIObject
-
                 poolManager.GetObject(GUIObjectName, ref GUIObject);
 
-                // get run-time type of the instance
+                // Get run-time type of the GUIElement instance
                 Type currentType = GUIObject.GetType();
 
-                // Get Event to tring
+                // Get from GUIElement the Event you want to tring
                 EventInfo eventInfo = currentType.GetEvent(row["Event"].ToString());
+
+                // Get the Action (functions) from EventHandler object to Run when event is trigged
+                EventHandler EventHandlers = new EventHandler();
+                MethodInfo methodInfo = EventHandlers.GetType().GetMethod(row["Handler"].ToString(), 
+                                                                            new[] 
+                                                                                { 
+                                                                                typeof(object), 
+                                                                                typeof(System.EventArgs) 
+                                                                                }
+                                                                            );
+
+                // Use Delegate to hook the Action (function) to the GUIElement  
                 Type tDelegate = eventInfo.EventHandlerType;
-
-                MethodInfo methodInfo = currentType.GetMethod(row["Handler"].ToString(), new [] { typeof(object), typeof(System.EventArgs) });
+                Delegate del = Delegate.CreateDelegate(tDelegate, EventHandlers, methodInfo);
                 
-                //MethodInfo methodInfo = currentType.GetMethod(row["Handler"].ToString());
-
-                
-                Delegate del = Delegate.CreateDelegate(tDelegate, GUIObject, methodInfo);
-                MethodInfo addHandler = eventInfo.GetAddMethod();
-
-                //eventInfo.AddEventHandler(GUIObject, del);
+                //Add the Delegate to GUIElement
+                eventInfo.AddEventHandler(GUIObject, del);
 
             } // end DataSet loop
 
         } // end eventTrigger
-        public void SaveTheDataSet(object sender, System.EventArgs e)
-        {
-            MessageBox.Show("Hello! This is save event");
-        }      
+     
     } // end class
 
 
