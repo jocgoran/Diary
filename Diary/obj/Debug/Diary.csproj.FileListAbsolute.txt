@@ -7,3 +7,4 @@ C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary
 C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary.csproj.GenerateResource.Cache
 C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary.exe
 C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary.pdb
+C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary.csprojResolveAssemblyReference.cache

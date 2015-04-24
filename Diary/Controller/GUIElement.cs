@@ -35,13 +35,8 @@ namespace Diary.Controller
                     InterlaceGUIElements(TableName);
                     break;
                 }
-                case "GUIEventToHandler":
-                {
-                    break;
-                }
                 default:
                 {
-                    UdpdateFieldValue(TableName);
                     break;
                 }
             }
@@ -99,6 +94,11 @@ namespace Diary.Controller
                                     GUIObject = new Label1();
                                     break;
                                 }
+                                case "DataGridView":
+                                {
+                                    GUIObject = new DataGridView1();
+                                    break;
+                                }
                                 default:
                                 {
                                     // column "type" has undefined Field Type 
@@ -118,7 +118,7 @@ namespace Diary.Controller
         }
 
 
-        public void SetAttributesOfGUIElements(String TableName)
+        public void SetAttributesOfGUIElements(string TableName)
         {
             foreach (DataRow row in GlobalVar.DataSet.Tables[TableName].Rows) // Loop over the rows.
             {
@@ -131,6 +131,9 @@ namespace Diary.Controller
 
                 // get Object to manage
                 poolManager.GetObject(GUIObjectName, ref GUIObject);
+                
+                // set the unique Name of the object
+                GUIObject.Name = GUIObjectName;
 
                 // set all Attributes of Form/Tab/Field
                 foreach (DataColumn column in GlobalVar.DataSet.Tables[TableName].Columns)
@@ -187,7 +190,7 @@ namespace Diary.Controller
             } // end row loop
         }
 
-        public void InterlaceGUIElements(String TableName)
+        public void InterlaceGUIElements(string TableName)
         {
             // used to create GUIElements
             string GUIObjectName;
@@ -227,46 +230,8 @@ namespace Diary.Controller
                 // Add GUIObject
                 GUIContainer.Controls.Add(GUIObject);
             } //end loop
-        }
 
-
-        public void UdpdateFieldValue(String TableName)
-        {
-            // Update the correct Field.Value attribute
-            // execute assignment
-            foreach (DataRow row in GlobalVar.DataSet.Tables[TableName].Rows) // Loop over the rows.
-            {
-                // set Text Attributes of the Field
-                foreach (DataColumn column in GlobalVar.DataSet.Tables[TableName].Columns)
-                {
-                    string ColName = column.ColumnName;
-
-                    // Search table and column in Field DataTable 
-                    string expression = "table = '" + TableName + "' and column = '" + ColName + "'";
-
-                    // Use the Select method to find all Fields that use matching the filter.
-                    DataRow[] foundRows = GlobalVar.DataSet.Tables["field"].Select(expression);
-
-                    foreach (DataRow dr in foundRows)
-                    {
-                        // Get ID of Form
-                        string FieldID = dr["id"].ToString();
-                    
-                        //Get GUIObject
-                        dynamic GUIObject = null;
-                        poolManager.GetObject("field_" + FieldID, ref GUIObject);
-
-                        // Set Text
-                        GUIObject.Text = row[ColName].ToString();
-                        //PropertyInfo cntrlProperty = GUIObject.GetType().GetProperty("Text");
-                        //cntrlProperty.SetValue(GUIObject, row[ColName].ToString());
-                    }
-
-                }
-
-            }
-
-        }
+        } // end function
 
     } // end class
 } // end namespace

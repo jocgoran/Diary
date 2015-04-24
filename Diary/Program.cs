@@ -45,6 +45,11 @@ namespace Diary
             // load all EventsToTriggers
             DataAccess.GetTable("GUIEventToHandler"); // also create all fields
 
+            // create GUIDataRenderer that render user generated data
+            GUIDataRenderer GUIDataRenderers = new GUIDataRenderer();
+            // Add GUIDataRenderer as observers to observee (data provider)
+            DataAccess.Subscribe(GUIDataRenderers);
+
 
             // fill fields with use saved data
             DataAccess.GetTable("event"); // also create all fields
