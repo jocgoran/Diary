@@ -38,9 +38,9 @@ namespace Diary
             DataAccess.GetTable("asgmt_form_field"); // assign fields to form
 
             // create EventsToTriggers
-            EventTrigger EventsToTriggers = new EventTrigger();
+            EventHub GenerareAllEvents = new EventHub();
             // Add GUIElements as observers to observee (data provider)
-            DataAccess.Subscribe(EventsToTriggers);
+            DataAccess.Subscribe(GenerareAllEvents);
 
             // load all EventsToTriggers
             DataAccess.GetTable("GUIEventToHandler"); // also create all fields

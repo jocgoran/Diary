@@ -44,7 +44,7 @@ namespace Diary.Controller
         }
 
 
-        public void BuildGuiElements(String TableName)
+        private void BuildGuiElements(String TableName)
         {
             // used to create GUIElements
             string GUIObjectName;
@@ -118,7 +118,7 @@ namespace Diary.Controller
         }
 
 
-        public void SetAttributesOfGUIElements(string TableName)
+        private void SetAttributesOfGUIElements(string TableName)
         {
             foreach (DataRow row in GlobalVar.DataSet.Tables[TableName].Rows) // Loop over the rows.
             {
@@ -190,7 +190,7 @@ namespace Diary.Controller
             } // end row loop
         }
 
-        public void InterlaceGUIElements(string TableName)
+        private void InterlaceGUIElements(string TableName)
         {
             // used to create GUIElements
             string GUIObjectName;
