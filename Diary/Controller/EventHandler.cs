@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Data;
+using System.Reflection;
 
 namespace Diary.Controller
 {
@@ -35,6 +36,15 @@ namespace Diary.Controller
         // begin with the list of functions of forms
         public void HandlerDispatcher(object sender, EventArgs e)
         {
+
+            //System.Windows.Forms.MouseEventArgs e)
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if (me.Button == MouseButtons.Left)
+            { 
+                return;
+            }
+            
             // used to create GUIElements
             string GUIObjectName;
             dynamic GUIObject = null;
@@ -67,9 +77,12 @@ namespace Diary.Controller
         // begin with the list of functions of forms
         public void Login(object sender, EventArgs e)
         {
-            {
-
-            }
+            // match the Logon/Pwd with DB entries
+             //string a = ((TextBox)sender).Name;
+            //Get from FieldID to FormID
+            
+            //Search Login and Passwords
+ 
         }
         
         // begin with the list of functions of forms

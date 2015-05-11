@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\EventArgs.cs" />
     <Compile Include="Controller\EventHandler.cs" />
     <Compile Include="Controller\EventHub.cs" />
     <Compile Include="Controller\GUIDataRenderer.cs" />

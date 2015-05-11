@@ -38,7 +38,7 @@ namespace Diary.Controller
                 {
                     // Get from GUIElement the Event you want to tring
                     EventInfo eventInfo = currentType.GetEvent(row["Event"].ToString());
-
+                    
                     // if the GUIElement support the event
                     if (eventInfo!=null)
                     {
@@ -48,7 +48,7 @@ namespace Diary.Controller
                                                                                     new[] 
                                                                                         { 
                                                                                         typeof(object), 
-                                                                                        typeof(EventArgs) 
+                                                                                        typeof(EventArgs)
                                                                                         }
                                                                                     );
 
