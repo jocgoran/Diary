@@ -37,52 +37,64 @@ namespace Diary.Controller
         public void HandlerDispatcher(object sender, EventArgs e)
         {
 
-            //System.Windows.Forms.MouseEventArgs e)
-            MouseEventArgs me = (MouseEventArgs)e;
-
-            if (me.Button == MouseButtons.Left)
-            { 
-                return;
-            }
-            
             // used to create GUIElements
-            string GUIObjectName;
+            string GUIObjectName = ((dynamic)sender).Name;
+
+            //System.Windows.Forms.MouseEventArgs e)
+            MouseEventArgs me = e as MouseEventArgs;
+            if (me == null) return;
+            
+            // Get Handlers (functions) for this Event
+            string HandlersToBind = "(Event = 'all'";
+
+            // handle the Events
+            if(me.Button == MouseButtons.Left)  
+            HandlersToBind = HandlersToBind + " OR Event = 'MouseClick'";            
+
+            // Get Handlers (functions) for this Event
+            HandlersToBind = HandlersToBind + ")";
+
+            // Get Handlers (functions) for this Field
+            HandlersToBind = HandlersToBind + " AND GUIElementType + '_' + GUIElementId = '" + GUIObjectName + "'";
+
+            // Use the Select method to find all Handlers to bind
+            DataRow[] RowsToBind = GlobalVar.DataSet.Tables["GUIEventToHandler"].Select(HandlersToBind);
+
+            // Get GUIObject
             dynamic GUIObject = null;
+            poolManager.GetObject(GUIObjectName, ref GUIObject);
 
-            // Dispatch Handlers according to DB entries
-            foreach (DataRow row in GlobalVar.DataSet.Tables["GUIEventToHandler"].Rows) // Loop over the rows.
+            // Invoke all assigned handlers
+            foreach (DataRow row in RowsToBind) // Loop over the rows.
             {
-                // compose GUIObjectName
-                GUIObjectName = row["GUIElementType"].ToString() + "_" + row["GUIElementId"].ToString();
 
-                // Get GUIObject
-                poolManager.GetObject(GUIObjectName, ref GUIObject);
-
-                if (GUIObject.Equals(sender))
-                {
-                    System.Reflection.MethodInfo method = this.GetType().GetMethod(row["Handler"].ToString(), new[] 
-                                            { 
-                                            typeof(object), 
-                                            typeof(EventArgs) 
-                                            });
-                    method.Invoke(this, new object[] { sender, e});
+                // bind method
+                System.Reflection.MethodInfo method = this.GetType().GetMethod(row["Handler"].ToString(), new[] 
+                                        { 
+                                        typeof(object), 
+                                        typeof(EventArgs) 
+                                        });
+                method.Invoke(this, new object[] { sender, e});
+                
+                // always call this function to write Log
+                TraceEvent(sender, e, row["Handler"].ToString());
                     
-                    TraceEvent(sender, e, row["Handler"].ToString());
-                    
-                }
             }
         }
-       
 
         // begin with the list of functions of forms
         public void Login(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Do you want to Login?", "Yes", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+
+            }
             // match the Logon/Pwd with DB entries
              //string a = ((TextBox)sender).Name;
             //Get from FieldID to FormID
             
             //Search Login and Passwords
- 
         }
         
         // begin with the list of functions of forms

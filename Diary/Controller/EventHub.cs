@@ -1,5 +1,6 @@
 ﻿using Diary.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -29,15 +30,13 @@ namespace Diary.Controller
                 Type currentType = GUIObject.GetType();
 
                 // prepare to list all Events for trigger
-                DataView view = new DataView(GlobalVar.DataSet.Tables[TableName]);
-                DataTable AllEvents = new DataTable();
-                AllEvents = view.ToTable(true, "Event");
+                ArrayList AllEvents = new ArrayList(new string[] { "MouseClick","MouseHover" });
 
                 // add all Events to every GUIElement
-                foreach (DataRow row in AllEvents.Rows) // Loop over the rows.
+                foreach (string Event in AllEvents) // Loop over all Events
                 {
                     // Get from GUIElement the Event you want to tring
-                    EventInfo eventInfo = currentType.GetEvent(row["Event"].ToString());
+                    EventInfo eventInfo = currentType.GetEvent(Event);
                     
                     // if the GUIElement support the event
                     if (eventInfo!=null)
@@ -60,7 +59,7 @@ namespace Diary.Controller
                         eventInfo.AddEventHandler(GUIObject, del);
                     }
              
-                } // end DataView loop
+                } // end AllEvents loop
     
             } // end Object loop
 
