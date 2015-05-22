@@ -50,9 +50,11 @@ namespace Diary
             // Add GUIDataRenderer as observers to observee (data provider)
             DataAccess.Subscribe(GUIDataRenderers);
 
-
             // fill fields with use saved data
             DataAccess.GetTable("event"); // also create all fields
+
+            // load user data
+            DataAccess.GetTable("user"); // also create all fields
 
             // start the first Form
             PoolManager poolManager = PoolManager.Instance;

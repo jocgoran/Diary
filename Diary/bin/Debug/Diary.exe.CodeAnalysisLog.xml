@@ -10,7 +10,7 @@
        <Types>
         <Type Name="DBConnect" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2015-05-20 22:51:54Z" FixCategory="NonBreaking">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2015-05-22 23:18:19Z" FixCategory="NonBreaking">
            <Issue Name="NonBreaking" Certainty="95" Level="CriticalError">Implementieren Sie IDisposable für "'DBConnect'", weil Member der folgenden IDisposable-Typen instanziiert werden: 'SqlConnection'.</Issue>
           </Message>
          </Messages>

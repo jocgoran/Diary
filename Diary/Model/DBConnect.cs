@@ -71,7 +71,7 @@ namespace Diary
         public void FillDataTable(string TableName)
         {
             // create DataAdapter
-            string SQLQuery = "Select * from " + TableName;
+            string SQLQuery = "Select * from [" + TableName + "];";
             SqlDataAdapter DataAdapter = new SqlDataAdapter(SQLQuery, connection);
 
             // Fill Table data into DataSet            

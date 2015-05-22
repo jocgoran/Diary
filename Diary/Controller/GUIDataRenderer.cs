@@ -58,10 +58,10 @@ namespace Diary.Controller
                 }
                 
                 // Get all Records with PrimaryKey for this Field from Field_PrimaryKesyToRender
-                string DataToDisplay = "id IN '(" + PKsToRender[Int32.Parse(FieldID)] + ")'";
+                string DataToDisplay = "id IN (" + PKsToRender[Int32.Parse(FieldID)] + ")";
 
                 // Use the Select method to find all Fields that use matching the filter.
-                DataRow[] RowsToDisplay = GlobalVar.DataSet.Tables["TableName"].Select(DataToDisplay);
+                DataRow[] RowsToDisplay = GlobalVar.DataSet.Tables[TableName].Select(DataToDisplay);
 
                 // Update the Field.Text attribute with the correct UniquePrimaryKey UPK_ID
                 foreach (DataRow row in RowsToDisplay) // Loop over the rows.

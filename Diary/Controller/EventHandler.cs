@@ -3,12 +3,14 @@ using System;
 using System.IO;
 using System.Data;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace Diary.Controller
 {
     public sealed class EventHandler
     {
         PoolManager poolManager = PoolManager.Instance;
+        public static Dictionary<string, byte[]> dicToken = new Dictionary<string, byte[]>();
 
         // singleton design pattern for initalization
         private static volatile EventHandler instance;
@@ -85,16 +87,26 @@ namespace Diary.Controller
         // begin with the list of functions of forms
         public void Login(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do you want to Login?", "Yes", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
 
-            }
-            // match the Logon/Pwd with DB entries
-             //string a = ((TextBox)sender).Name;
-            //Get from FieldID to FormID
-            
-            //Search Login and Passwords
+            // Get Login
+            dynamic GUIObject = null;
+            poolManager.GetObject("field_1", ref GUIObject);
+            string loginName = GUIObject.Text;
+            // Get Password
+            poolManager.GetObject("field_2", ref GUIObject);
+            string password = GUIObject.Text;
+
+            DataRow[] LoggedUser = GlobalVar.DataSet.Tables["user"].Select("login = '" + loginName + "' AND password = '" + password + "'");
+            if (LoggedUser.Length > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Ok, you are logged in", "Yes", MessageBoxButtons.YesNo);
+
+                string token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                byte[] time = BitConverter.GetBytes(DateTime.UtcNow.ToBinary());
+                DateTime when = DateTime.FromBinary(BitConverter.ToInt64(time, 0));
+
+                dicToken.Add(token, time);
+            }            
         }
         
         // begin with the list of functions of forms
