@@ -10,9 +10,7 @@ namespace Diary.Controller
     {
         PoolManager poolManager = PoolManager.Instance;
 
-        Dictionary<int, List<int>> PKsToRender = new Dictionary<int, List<int>>();
-
-//        List<int> lPrimaryKesyToRender = new List<int>();
+        public static Dictionary<int, List<int>> PKsToRender = new Dictionary<int, List<int>>();
 
         public GUIDataRenderer()
         {
@@ -58,7 +56,7 @@ namespace Diary.Controller
                 }
                 
                 // Get all Records with PrimaryKey for this Field from Field_PrimaryKesyToRender
-                string DataToDisplay = "id IN (" + PKsToRender[Int32.Parse(FieldID)] + ")";
+                string DataToDisplay = "id IN (" + GetPKsToRender(FieldID) + ")";
 
                 // Use the Select method to find all Fields that use matching the filter.
                 DataRow[] RowsToDisplay = GlobalVar.DataSet.Tables[TableName].Select(DataToDisplay);
@@ -74,6 +72,25 @@ namespace Diary.Controller
             } //end loop
 
         } // end function
+
+        public void SetPKsToRender(string FieldID)
+        {
+            PKsToRender.Remove(Int32.Parse(FieldID));
+
+            //Set the PK comma delimited string of records in use
+            List<int> list = new List<int>();
+            list.Add(2);
+
+            PKsToRender.Add(Int32.Parse(FieldID), list);
+        }
+
+        private string GetPKsToRender(string FieldID)
+        {
+            //Get the PK comma delimited string of records in use
+            List<int> list=PKsToRender[Int32.Parse(FieldID)];
+            string commaDelimitedPKs = String.Join(",", list);
+            return commaDelimitedPKs;
+        }
 
     } // end class
 }

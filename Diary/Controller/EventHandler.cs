@@ -10,7 +10,6 @@ namespace Diary.Controller
     public sealed class EventHandler
     {
         PoolManager poolManager = PoolManager.Instance;
-        public static Dictionary<string, byte[]> dicToken = new Dictionary<string, byte[]>();
 
         // singleton design pattern for initalization
         private static volatile EventHandler instance;
@@ -105,8 +104,12 @@ namespace Diary.Controller
                 byte[] time = BitConverter.GetBytes(DateTime.UtcNow.ToBinary());
                 DateTime when = DateTime.FromBinary(BitConverter.ToInt64(time, 0));
 
-                dicToken.Add(token, time);
-            }            
+                GlobalVar.dicToken.Add(token, time);
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Username or password are wrong.", "Message");
+            }
         }
         
         // begin with the list of functions of forms

@@ -49,6 +49,8 @@ namespace Diary
             GUIDataRenderer GUIDataRenderers = new GUIDataRenderer();
             // Add GUIDataRenderer as observers to observee (data provider)
             DataAccess.Subscribe(GUIDataRenderers);
+            // sma
+            GUIDataRenderers.SetPKsToRender("1");
 
             // fill fields with use saved data
             DataAccess.GetTable("event"); // also create all fields

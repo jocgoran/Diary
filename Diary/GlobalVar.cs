@@ -6,20 +6,16 @@ using System.Data;
 
 namespace Diary
 {
-    /// <summary>
-    /// Contains global variables for project.
-    /// </summary>
-    public static class GlobalVar
+    // Contains global variables for project.
+   public static class GlobalVar
     {
 
-        /// <summary>
-        /// Static value protected by access routine.
-        /// </summary>
+        public static Dictionary<string, byte[]> dicToken = new Dictionary<string, byte[]>();
+
+        // Static value protected by access routine.
         static DataSet _dataSet;
 
-        /// <summary>
-        /// Access routine for global variable.
-        /// </summary>
+        // Access routine for global variable.
         public static DataSet DataSet
         {
             get
