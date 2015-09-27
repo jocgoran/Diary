@@ -83,7 +83,9 @@ namespace Diary.Controller
             }
         }
 
-        // begin with the list of functions of forms
+        // ******************************************
+        // begin with the list of functions for forms
+        // ******************************************
         public void Login(object sender, EventArgs e)
         {
 
@@ -118,8 +120,43 @@ namespace Diary.Controller
             DialogResult dialogResult = MessageBox.Show("Do you want to save?", "Save", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
- 
+                // used to create GUIElements
+                string GUIObjectName = ((dynamic)sender).Name;
+
+                // Get GUIObject TAB
+                dynamic GUIObject = null;
+                poolManager.GetObject(GUIObjectName, ref GUIObject);
+                
+                // Use the Select method to find Tab of the button
+                DataRow[] TabToSave = GlobalVar.DataSet.Tables["asgmt_tab_field"].Select("field_id_" + GUIObjectName);
+
+                // 
+                if (TabToSave.Length > 0)
+                {
+
+
+                }
+                
+
+
+                // Use the Select method to find Tab of the button
+                DataRow[] FormToSave = GlobalVar.DataSet.Tables["asgmt_tab_field"].Select("field_id_" + GUIObjectName);
+
+                if (FormToSave.Length > 0)
+                {
+
+
+                }
+                
             }
+        }
+
+
+        // begin with the list of functions of forms
+        public void loadFormOrTab(object sender, EventArgs e)
+        {
+            // get the Form or Tab to load
+            // user a strucutre called "Navigation" that contain Form and Tabs and save its history usage 
         }
 
         public void TraceEvent(object sender, EventArgs e, string HandlerName)
