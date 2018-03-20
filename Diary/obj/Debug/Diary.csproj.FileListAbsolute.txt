@@ -8,3 +8,13 @@ C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary
 C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary.exe
 C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary.pdb
 C:\Users\Goran\Documents\Visual Studio 2013\Projects\Diary\Diary\obj\Debug\Diary.csprojResolveAssemblyReference.cache
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\bin\Debug\Diary.exe.config
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\bin\Debug\Diary.exe
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\bin\Debug\Diary.pdb
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\bin\Debug\Diary.exe.CodeAnalysisLog.xml
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\bin\Debug\Diary.exe.lastcodeanalysissucceeded
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\obj\Debug\Diary.csprojResolveAssemblyReference.cache
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\obj\Debug\Diary.Properties.Resources.resources
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\obj\Debug\Diary.csproj.GenerateResource.Cache
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\obj\Debug\Diary.exe
+C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\obj\Debug\Diary.pdb

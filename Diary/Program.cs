@@ -37,6 +37,11 @@ namespace Diary
             // assign form fields
             DataAccess.GetTable("asgmt_form_field"); // assign fields to form
 
+            // create GUIDataRenderer that render user generated data
+            GUIDataRenderer GUIDataRenderers = new GUIDataRenderer();
+            // Add GUIDataRenderer as observers to observee (data provider)
+            DataAccess.Subscribe(GUIDataRenderers);
+
             // create EventsToTriggers
             EventHub GenerareAllEvents = new EventHub();
             // Add GUIElements as observers to observee (data provider)
@@ -45,12 +50,10 @@ namespace Diary
             // load all EventsToTriggers
             DataAccess.GetTable("GUIEventToHandler"); // also create all fields
 
-            // create GUIDataRenderer that render user generated data
-            GUIDataRenderer GUIDataRenderers = new GUIDataRenderer();
-            // Add GUIDataRenderer as observers to observee (data provider)
-            DataAccess.Subscribe(GUIDataRenderers);
-            // sma
-            GUIDataRenderers.SetPKsToRender("1");
+            // Set default PK to render last PK value for the first form
+            GUIDataExplorer DataExplorer = new GUIDataExplorer();
+            DataExplorer.SetPKsToRender("9", 3);
+            DataExplorer.SetPKsToRender("1009", 3);
 
             // fill fields with use saved data
             DataAccess.GetTable("event"); // also create all fields
@@ -61,6 +64,8 @@ namespace Diary
             // start the first Form
             PoolManager poolManager = PoolManager.Instance;
             dynamic GUIObject = null;
+
+            // Build the first Form
             poolManager.GetObject("form_1", ref GUIObject);
             GUIObject.ShowDialog();
         }

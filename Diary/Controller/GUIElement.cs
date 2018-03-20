@@ -53,7 +53,7 @@ namespace Diary.Controller
             // create all Forms, tabs and fields
             foreach (DataRow row in GlobalVar.DataSet.Tables[TableName].Rows) // Loop over the rows.
             {
-                // compose GUIObjectName
+                // compose GUIObjectName (field_[fieldID] )
                 GUIObjectName = TableName + "_" + row["id"].ToString();
 
                 // get Object to manage

@@ -41,10 +41,17 @@ namespace Diary.Controller
             // used to create GUIElements
             string GUIObjectName = ((dynamic)sender).Name;
 
-            //System.Windows.Forms.MouseEventArgs e)
+            // Get Handlers for the OnKeyUp Event
+            if (e is KeyEventArgs)
+               {
+               WriteFieldValueToDataSetRecord(sender, e);
+               return;
+               }
+
+            //System.Windows.Forms.MouseEventArgs e
             MouseEventArgs me = e as MouseEventArgs;
-            if (me == null) return;
-            
+            if (e == null) return;
+
             // Get Handlers (functions) for this Event
             string HandlersToBind = "(Event = 'all'";
 
@@ -65,7 +72,7 @@ namespace Diary.Controller
             dynamic GUIObject = null;
             poolManager.GetObject(GUIObjectName, ref GUIObject);
 
-            // Invoke all assigned handlers
+            // Invoke all assigned Mouse handlers
             foreach (DataRow row in RowsToBind) // Loop over the rows.
             {
 
@@ -75,7 +82,7 @@ namespace Diary.Controller
                                         typeof(object), 
                                         typeof(EventArgs) 
                                         });
-                method.Invoke(this, new object[] { sender, e});
+                method.Invoke(this, new object[] { sender, e });
                 
                 // always call this function to write Log
                 TraceEvent(sender, e, row["Handler"].ToString());
@@ -113,42 +120,40 @@ namespace Diary.Controller
                 DialogResult dialogResult = MessageBox.Show("Username or password are wrong.", "Message");
             }
         }
-        
+
         // begin with the list of functions of forms
-        public void SaveTheDataSet(object sender, EventArgs e)
+        public void SaveTheForm(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Do you want to save?", "Save", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 // used to create GUIElements
-                string GUIObjectName = ((dynamic)sender).Name;
+                string GUIObjectName = ((Button)sender).Name;
 
-                // Get GUIObject TAB
-                dynamic GUIObject = null;
-                poolManager.GetObject(GUIObjectName, ref GUIObject);
-                
-                // Use the Select method to find Tab of the button
-                DataRow[] TabToSave = GlobalVar.DataSet.Tables["asgmt_tab_field"].Select("field_id_" + GUIObjectName);
-
-                // 
-                if (TabToSave.Length > 0)
-                {
-
-
-                }
-                
-
-
-                // Use the Select method to find Tab of the button
-                DataRow[] FormToSave = GlobalVar.DataSet.Tables["asgmt_tab_field"].Select("field_id_" + GUIObjectName);
-
-                if (FormToSave.Length > 0)
-                {
-
-
-                }
-                
+                // update the DataSet with values of Fields
+                DataSetUpdater DataSetUpdater = new DataSetUpdater();
+                DataSetUpdater.AcceptDataSetChanges(GUIObjectName);
             }
+        }
+
+        public void WriteFieldValueToDataSetRecord(object sender, EventArgs e)
+        {
+            string TextToSave="";
+            string GUIObjectName = "";
+            if (sender is TextBox)
+            {
+               TextToSave = ((TextBox)(sender)).Text;
+               GUIObjectName = ((TextBox)(sender)).Name;
+            }
+            // this two fields are login and password
+            if (GUIObjectName == "field_1" || GUIObjectName == "field_2")
+               return;
+
+            // NEVER try to implemnt update of the DataGridView as a whole 
+
+            // update the DataSet with values of Fields
+            DataSetUpdater DataSetUpdater = new DataSetUpdater();
+            DataSetUpdater.WriteFieldToDataSetRecord(GUIObjectName, TextToSave);
         }
 
 
@@ -158,6 +163,13 @@ namespace Diary.Controller
             // get the Form or Tab to load
             // user a strucutre called "Navigation" that contain Form and Tabs and save its history usage 
         }
+
+
+        public void ShowMessage(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you like it?", "me", MessageBoxButtons.YesNo);
+        }
+
 
         public void TraceEvent(object sender, EventArgs e, string HandlerName)
         {

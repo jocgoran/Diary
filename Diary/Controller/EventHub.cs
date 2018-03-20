@@ -30,7 +30,7 @@ namespace Diary.Controller
                 Type currentType = GUIObject.GetType();
 
                 // prepare to list all Events for trigger
-                ArrayList AllEvents = new ArrayList(new string[] { "MouseClick","MouseHover" });
+                ArrayList AllEvents = new ArrayList(new string[] { "MouseClick", "KeyUp" }); // , "MouseHover"
 
                 // add all Events to every GUIElement
                 foreach (string Event in AllEvents) // Loop over all Events

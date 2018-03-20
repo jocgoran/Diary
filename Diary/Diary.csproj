@@ -71,6 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\GUIDataExplorer.cs" />
+    <Compile Include="Controller\DataSetUpdater.cs" />
     <Compile Include="Controller\EventHandler.cs" />
     <Compile Include="Controller\EventHub.cs" />
     <Compile Include="Controller\GUIDataRenderer.cs" />

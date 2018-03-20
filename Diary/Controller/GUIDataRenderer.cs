@@ -1,6 +1,5 @@
 ﻿using Diary.View;
 using System;
-using System.Collections.Generic;
 using System.Data;
 
 namespace Diary.Controller
@@ -10,10 +9,32 @@ namespace Diary.Controller
     {
         PoolManager poolManager = PoolManager.Instance;
 
-        public static Dictionary<int, List<int>> PKsToRender = new Dictionary<int, List<int>>();
+        // singleton design pattern for initalization
+        private static volatile GUIDataRenderer instance;
+        private static object syncRoot = new Object();
 
-        public GUIDataRenderer()
+        // the renderer have imperatively to now about Data that are explored now
+        GUIDataExplorer DataExplorer = new GUIDataExplorer();
+
+        //Constructor
+        public GUIDataRenderer() { }
+
+        //Singleton
+        public static GUIDataRenderer Instance
         {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                            instance = new GUIDataRenderer();
+                    }
+                }
+
+                return instance;
+            }
         }
 
         public void Render(string TableName)
@@ -50,13 +71,13 @@ namespace Diary.Controller
                 }
 
               	// See whether it contains this string.
-                if (!PKsToRender.ContainsKey(Int32.Parse(FieldID)))
+                if (DataExplorer.GetPKsToRender(FieldID) == "0")
                 {
                     continue;
                 }
                 
                 // Get all Records with PrimaryKey for this Field from Field_PrimaryKesyToRender
-                string DataToDisplay = "id IN (" + GetPKsToRender(FieldID) + ")";
+                string DataToDisplay = "id IN (" + DataExplorer.GetPKsToRender(FieldID) + ")";
 
                 // Use the Select method to find all Fields that use matching the filter.
                 DataRow[] RowsToDisplay = GlobalVar.DataSet.Tables[TableName].Select(DataToDisplay);
@@ -73,24 +94,7 @@ namespace Diary.Controller
 
         } // end function
 
-        public void SetPKsToRender(string FieldID)
-        {
-            PKsToRender.Remove(Int32.Parse(FieldID));
 
-            //Set the PK comma delimited string of records in use
-            List<int> list = new List<int>();
-            list.Add(2);
-
-            PKsToRender.Add(Int32.Parse(FieldID), list);
-        }
-
-        private string GetPKsToRender(string FieldID)
-        {
-            //Get the PK comma delimited string of records in use
-            List<int> list=PKsToRender[Int32.Parse(FieldID)];
-            string commaDelimitedPKs = String.Join(",", list);
-            return commaDelimitedPKs;
-        }
 
     } // end class
 }
