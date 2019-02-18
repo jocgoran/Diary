@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2017\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="15.0">
  <Targets>
-  <Target Name="C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\bin\Debug\Diary.exe">
+  <Target Name="C:\Users\jocgr\source\repos\Diary\Diary\bin\Debug\Diary.exe">
    <Modules>
     <Module Name="diary.exe">
      <Namespaces>
@@ -10,15 +10,15 @@
        <Types>
         <Type Name="DBConnect" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2017-08-08 22:08:17Z" FixCategory="NonBreaking">
-           <Issue Name="NonBreaking" Certainty="95" Level="CriticalError">Implementieren Sie IDisposable für "'DBConnect'", weil Member der folgenden IDisposable-Typen instanziiert werden: 'SqlConnection'.</Issue>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2019-02-18 01:21:36Z" FixCategory="NonBreaking">
+           <Issue Name="NonBreaking" Certainty="95" Level="CriticalError">Implementare IDisposable in 'DBConnect' poiché crea membri dei tipi IDisposable seguenti: 'SqlConnection'.</Issue>
           </Message>
          </Messages>
          <Members>
           <Member Name="#FillDataTable(System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="SQL-Abfragen auf Sicherheitsrisiken überprüfen" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2017-08-08 22:08:17Z" FixCategory="DependsOnFix">
-             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Users\Goran\Documents\Visual Studio 2017\Projects\Diary\Diary\Model" File="DBConnect.cs" Line="75">Die in 'DBConnect.FillDataTable(string)' an 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' übergebene Abfragezeichenfolge könnte die folgenden 'TableName'-Variablen enthalten. Wenn eine dieser Variablen aus Benutzereingaben stammt, sollten Sie eine gespeicherte Prozedur oder eine parametrisierte SQL-Abfrage verwenden, anstatt die Abfrage mit Zeichenfolgenverkettungen zu erstellen.</Issue>
+            <Message TypeName="Controllare l'eventuale vulnerabilità di sicurezza delle query SQL" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-02-18 01:21:36Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Users\jocgr\source\repos\Diary\Diary\Model" File="DBConnect.cs" Line="75">La stringa di query passata a 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' in 'DBConnect.FillDataTable(string)' potrebbe contenere le variabili 'TableName'. Se una qualsiasi di queste variabili viene fornita in base all'input dell'utente, provare a usare una stored procedure o una query SQL con parametri invece di compilare la query mediante concatenazioni di stringa.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -32,10 +32,10 @@
   </Target>
  </Targets>
  <Rules>
-  <Rule TypeName="SQL-Abfragen auf Sicherheitsrisiken überprüfen" Category="Microsoft.Security" CheckId="CA2100">
-   <Name>SQL-Abfragen auf Sicherheitsrisiken überprüfen</Name>
-   <Description>Eine SQL-Befehlszeichenfolge, die aus Benutzereingaben erstellt wird, ist anfällig für Angriffe durch Einschleusung von SQL-Befehlen. Microsoft SQL Server und andere Datenbankserver unterstützen gespeicherte Prozeduren und parametrisierte SQL-Abfragen, durch die das Risiko von Angriffen durch Einschleusung von Befehlen reduziert wird.</Description>
-   <Resolution Name="WithNonLiterals">Die in {1} an {0} übergebene Abfragezeichenfolge könnte die folgenden {2}-Variablen enthalten. Wenn eine dieser Variablen aus Benutzereingaben stammt, sollten Sie eine gespeicherte Prozedur oder eine parametrisierte SQL-Abfrage verwenden, anstatt die Abfrage mit Zeichenfolgenverkettungen zu erstellen.</Resolution>
+  <Rule TypeName="Controllare l'eventuale vulnerabilità di sicurezza delle query SQL" Category="Microsoft.Security" CheckId="CA2100">
+   <Name>Controllare l'eventuale vulnerabilità di sicurezza delle query SQL</Name>
+   <Description>Una stringa di comando SQL compilata in base all'input dell'utente è vulnerabile agli attacchi injection SQL. Microsoft SQL Server e altri server database supportano le stored procedure e le query SQL con parametri, che riducono il rischio di attacchi injection.</Description>
+   <Resolution Name="WithNonLiterals">La stringa di query passata a {0} in {1} potrebbe contenere le variabili {2}. Se una qualsiasi di queste variabili viene fornita in base all'input dell'utente, provare a usare una stored procedure o una query SQL con parametri invece di compilare la query mediante concatenazioni di stringa.</Resolution>
    <Owner>RuleOwner</Owner>
    <Url>http://msdn.microsoft.com/library/ms182310.aspx</Url>
    <Email />
@@ -43,9 +43,9 @@
    <File Name="dataflowrules.dll" Version="15.0.0.0" />
   </Rule>
   <Rule TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001">
-   <Name>Typen, die löschbare Felder besitzen, müssen gelöscht werden können</Name>
-   <Description>Typen, die löschbare Member deklarieren, müssen auch IDisposable implementieren. Wenn der Typ keine nicht verwalteten Ressourcen besitzt, implementieren Sie dafür keinen Finalizer.</Description>
-   <Resolution Name="NonBreaking">Implementieren Sie IDisposable für "{0}", weil Member der folgenden IDisposable-Typen instanziiert werden: {1}.</Resolution>
+   <Name>I tipi proprietari di campi Disposable devono essere Disposable</Name>
+   <Description>I tipi che dichiarano membri Disposable devono implementare l'interfaccia IDisposable. Se il tipo non è proprietario di risorse non gestite, non implementare finalizzatori su di esso.</Description>
+   <Resolution Name="NonBreaking">Implementare IDisposable in {0} poiché crea membri dei tipi IDisposable seguenti: {1}.</Resolution>
    <Owner />
    <Url>http://msdn.microsoft.com/library/ms182172.aspx</Url>
    <Email>[none]</Email>
@@ -54,27 +54,27 @@
   </Rule>
  </Rules>
  <Localized>
-  <String Key="Category">Kategorie</String>
-  <String Key="Certainty">Sicherheit</String>
-  <String Key="CollapseAll">Alle zuklappen</String>
-  <String Key="CheckId">Prüf-ID</String>
-  <String Key="Error">Fehler</String>
-  <String Key="Errors">Fehler</String>
-  <String Key="ExpandAll">Alle aufklappen</String>
-  <String Key="Help">Hilfe</String>
-  <String Key="Line">Zeile</String>
-  <String Key="Messages">Meldung(en)</String>
-  <String Key="LocationNotStoredInPdb">[Nicht in PDB gespeicherter Speicherort]</String>
-  <String Key="Project">Projekt</String>
-  <String Key="Resolution">Auflösung</String>
-  <String Key="Rule">Regel</String>
-  <String Key="RuleFile">Regeldatei</String>
-  <String Key="RuleDescription">Regelbeschreibung</String>
-  <String Key="Source">Quelle</String>
-  <String Key="Status">Status</String>
-  <String Key="Target">Ziel</String>
-  <String Key="Warning">Warnung</String>
-  <String Key="Warnings">Warnung(en)</String>
-  <String Key="ReportTitle">Codeanalysebericht</String>
+  <String Key="Category">Categoria</String>
+  <String Key="Certainty">Attendibilità</String>
+  <String Key="CollapseAll">Comprimi tutto</String>
+  <String Key="CheckId">ID controllo</String>
+  <String Key="Error">Errore</String>
+  <String Key="Errors">errori</String>
+  <String Key="ExpandAll">Espandi tutto</String>
+  <String Key="Help">Guida</String>
+  <String Key="Line">Riga</String>
+  <String Key="Messages">messaggi</String>
+  <String Key="LocationNotStoredInPdb">[Percorso non archiviato nel PDB]</String>
+  <String Key="Project">Progetto</String>
+  <String Key="Resolution">Risoluzione</String>
+  <String Key="Rule">Regola</String>
+  <String Key="RuleFile">File delle regole</String>
+  <String Key="RuleDescription">Descrizione regola</String>
+  <String Key="Source">Origine</String>
+  <String Key="Status">Stato</String>
+  <String Key="Target">Destinazione</String>
+  <String Key="Warning">Avviso</String>
+  <String Key="Warnings">avvisi</String>
+  <String Key="ReportTitle">Report di analisi codice</String>
  </Localized>
 </FxCopReport>
