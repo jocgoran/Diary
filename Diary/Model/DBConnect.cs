@@ -25,11 +25,7 @@ namespace Diary
             database = "diary";
             //uid = "root";
             //password = "root";
-            string connectionString;
-            connectionString = "server=" + server + ";" + 
-                                       "Trusted_Connection=yes;" +
-                                       "database=" + database  + "; " + 
-                                       "connection timeout=30";
+            string connectionString = "server=" + server + ";Trusted_Connection=yes;database=" + database  + ";connection timeout=30";
             try
             {
                 connection = new SqlConnection(connectionString); 
