@@ -11,7 +11,7 @@ namespace Diary
             // if necessary, load the data of the table in the Global dataset
             if (GlobalVar.DataSet.Tables.Contains(TableName) == false)
             {
-                DBConnect DBConnection = new DBConnect();
+                SQLiteAccess DBConnection = new SQLiteAccess();
                 DBConnection.FillDataTable(TableName);
                 Render(TableName);
             }           
@@ -19,7 +19,7 @@ namespace Diary
 
         public void GetTupla(DataTable tableName)
         {
-            DBConnect DBConnection = new DBConnect();
+            SQLiteAccess DBConnection = new SQLiteAccess();
            // DBConnection.LoadTableInDataSet();
 
         }
